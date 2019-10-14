@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        $(function() {
+            var socket = io();
+            $('form').submit(function(e) {
+                e.preventDefault(); // prevents page reloading
+                socket.emit('chat message', $('#m').val());
+                $('#m').val('');
+                return false;
+            });
+            socket.on('new user', (data) => {
+                const random = 300;
+                $('#userList').append($(`
+              <li>
+                    <img src="https://i.pravatar.cc/${random}" alt="avatar">
+                    <div class="about">
+                        <div class="name">${data.username}</div>
+                        <div class="time">${data.time}</div>
+                    </div>
+                </li>
+              `));
+            });
+            socket.on('chat message', function(data) {
+                const color = data.username === 'user-0' ? 'me' : 'other';
+                $('#messages').append($(`<li class="${color}">${data.msg}</li>`));
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="users">
+            <ul id="userList"></ul>
+        </div>
+        <div class="chat">
+            <ul class="messages-container" id="messages"></ul>
+            <form action="">
+                <input id="m" autocomplete="off" />
+                <button>Send</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
