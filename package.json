@@ -1,11 +1,17 @@
 {
-  "name": "chat.io",
-  "version": "1.0.0",
-  "description": "chat demo with socket.io",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "chat.io",
+    "version": "2.0.0",
+    "description": "chat demo with socket.io",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "moment": "^2.24.0",
+        "nodemon": "^1.19.4",
+        "socket.io": "^2.3.0"
+    }
 }
